@@ -43,19 +43,19 @@ Interactive Streamlit application for real-time employee attrition prediction.
 
 ### Home Page
 
-![Home Page](home.png)
+![Home Page](assets/home.png)
 
 ### Low Attrition Prediction
 
-![Low Risk](low_risk.png)
+![Low Risk](assets/low_risk.png)
 
 ### Medium Attrition Risk
 
-![Medium Risk](medium_risk.png)
+![Medium Risk](assets/medium_risk.png)
 
 ### High Attrition Prediction
 
-![High Risk](high_risk.png)
+![High Risk](assets/high_risk.png)
 
 ## Future Improvements
 
