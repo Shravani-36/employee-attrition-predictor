@@ -1,0 +1,14 @@
+# Save the trained XGBoost model
+import pickle
+
+with open("../models/xgb_model.pkl", "wb") as file:
+    pickle.dump(xgb, file)
+
+print("Model saved successfully!")
+
+
+# Load the saved model
+with open("../models/xgb_model.pkl", "rb") as file:
+    loaded_model = pickle.load(file)
+
+print("Model loaded successfully!")
