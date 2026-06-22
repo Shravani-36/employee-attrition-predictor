@@ -1,39 +1,66 @@
 # Employee Attrition Prediction System
 
 ## Overview
-Machine Learning project that predicts employee attrition risk using employee demographics, job satisfaction, work-life balance, income, and overtime information.
+
+An end-to-end Machine Learning project that predicts employee attrition risk using employee demographics, compensation, work-life balance, job satisfaction, and overtime information.
 
 ## Dataset
 IBM HR Analytics Employee Attrition Dataset
-
+- Database integration
 ## Features
-- EDA
-- Feature Engineering
-- SMOTE
-- Logistic Regression
-- Random Forest
-- XGBoost
-- SHAP Explainability
-- Streamlit Deployment
+
+* Exploratory Data Analysis (EDA)
+* Feature Engineering
+* SMOTE for Class Imbalance
+* Logistic Regression
+* Random Forest
+* XGBoost
+* SHAP Explainability
+* Streamlit Web Application
+
+## Tech Stack
+
+* Python
+* Pandas
+* NumPy
+* Scikit-Learn
+* XGBoost
+* SHAP
+* Streamlit
 
 ## Model Performance
 
-XGBoost:
-Accuracy: XX%
-ROC-AUC: XX%
+* Accuracy: ~82%
+* ROC-AUC: ~80%
+* Optimized for attrition risk identification
 
-## Tech Stack
-Python
-Pandas
-Scikit-Learn
-XGBoost
-SHAP
-Streamlit
+## Deployment
+
+Interactive Streamlit application for real-time employee attrition prediction.
 
 ## Screenshots
-(Add screenshots)
+
+### Home Page
+
+![Home Page](assets/home.png)
+
+### Low Attrition Prediction
+
+![Low Risk](assets/low_risk.png)
+
+### High Attrition Prediction
+
+![High Risk](assets/high_risk.png)
+
 
 ## Future Improvements
-- Database integration
-- User authentication
-- Advanced explainability dashboard
+
+* Database Integration
+* User Authentication
+* Advanced Explainability Dashboard
+* Prediction History Tracking
+
+
+
+
+
