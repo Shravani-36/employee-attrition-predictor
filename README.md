@@ -35,6 +35,25 @@ IBM HR Analytics Employee Attrition Dataset
 * ROC-AUC: ~80%
 * Optimized for attrition risk identification
 
+## Feature Importance
+
+The model identified the following features as the strongest predictors of employee attrition.
+
+
+ ## Business Insights
+
+Analysis of employee attrition patterns revealed several key factors influencing employee turnover:
+
+* Employees working overtime are significantly more likely to leave the organization.
+* Lower job satisfaction scores are strongly associated with higher attrition risk.
+* Employees with poor work-life balance demonstrate increased turnover tendencies.
+* Shorter tenure employees are more likely to leave compared to long-term employees.
+* Monthly income and career growth opportunities influence employee retention.
+* Environmental satisfaction plays a critical role in reducing attrition risk.
+
+These insights can help HR teams design targeted retention strategies and improve workforce stability.
+
+
 ## Deployment
 
 Interactive Streamlit application for real-time employee attrition prediction.
