@@ -57,7 +57,9 @@ These insights can help HR teams design targeted retention strategies and improv
 ## Deployment
 
 Interactive Streamlit application for real-time employee attrition prediction.
+## Live Demo
 
+[Streamlit App](https://employee-attrition-predictor-e8pgspzdxmu5inxxcqovce.streamlit.app/)
 ## Screenshots
 
 ### Home Page
