@@ -1,15 +1,22 @@
 import streamlit as st
 import pandas as pd
 import pickle
+from pathlib import Path
 
+# ----------------------------
 # Page Configuration
+# ----------------------------
+
 st.set_page_config(
     page_title="Employee Attrition Predictor",
     page_icon="📊",
     layout="wide"
 )
 
+# ----------------------------
 # Custom Styling
+# ----------------------------
+
 st.markdown("""
 <style>
 .main {
@@ -23,25 +30,37 @@ st.markdown("""
     font-weight: bold;
 }
 
-.metric-container {
-    text-align: center;
+div[data-testid="metric-container"] {
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+    border-radius: 10px;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# Load Model
-with open("../models/xgb_model_streamlit.pkl", "rb") as file:
+# ----------------------------
+# Load Files
+# ----------------------------
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+MODEL_PATH = BASE_DIR / "models" / "xgb_model_streamlit.pkl"
+SCALER_PATH = BASE_DIR / "models" / "scaler_streamlit.pkl"
+FEATURE_PATH = BASE_DIR / "models" / "feature_names_streamlit.pkl"
+
+with open(MODEL_PATH, "rb") as file:
     model = pickle.load(file)
 
-# Load Scaler
-with open("../models/scaler_streamlit.pkl", "rb") as file:
+with open(SCALER_PATH, "rb") as file:
     scaler = pickle.load(file)
 
-# Load Feature Names
-with open("../models/feature_names_streamlit.pkl", "rb") as file:
+with open(FEATURE_PATH, "rb") as file:
     feature_names = pickle.load(file)
 
+# ----------------------------
 # Sidebar
+# ----------------------------
+
 st.sidebar.title("📊 Employee Attrition Predictor")
 
 st.sidebar.info(
@@ -53,16 +72,25 @@ st.sidebar.info(
 
 st.sidebar.success("Model: XGBoost")
 
+# ----------------------------
 # Main Title
+# ----------------------------
+
 st.title("📊 Employee Attrition Predictor")
 
 st.write(
-    "Predict whether an employee is likely to leave the company based on employee-related factors."
+    """
+    Predict whether an employee is likely to leave the company
+    based on employee-related factors.
+    """
 )
 
 st.divider()
 
-# Input Layout
+# ----------------------------
+# Inputs
+# ----------------------------
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -75,16 +103,16 @@ with col1:
     )
 
     monthly_income = st.number_input(
-        "Monthly Income",
+        "Monthly Income (₹)",
         min_value=1000,
         max_value=150000,
         value=10000
     )
 
     distance = st.number_input(
-        "Distance From Home",
+        "Distance From Home (km)",
         min_value=1,
-        max_value=30,
+        max_value=50,
         value=5
     )
 
@@ -107,21 +135,21 @@ with col2:
     job_satisfaction = st.slider(
         "Job Satisfaction ⭐",
         min_value=1,
-        max_value=4,
+        max_value=5,
         value=3
     )
 
     work_life = st.slider(
         "Work Life Balance ⭐",
         min_value=1,
-        max_value=4,
+        max_value=5,
         value=3
     )
 
     env_sat = st.slider(
         "Environment Satisfaction ⭐",
         min_value=1,
-        max_value=4,
+        max_value=5,
         value=3
     )
 
@@ -132,12 +160,14 @@ with col2:
 
 st.divider()
 
-# Prediction Button
+# ----------------------------
+# Prediction
+# ----------------------------
+
 if st.button("🚀 Predict Attrition"):
 
     overtime_value = 1 if overtime == "Yes" else 0
 
-    # Create Input Data
     input_data = pd.DataFrame(
         [[
             age,
@@ -153,10 +183,10 @@ if st.button("🚀 Predict Attrition"):
         columns=feature_names
     )
 
-    # Scale Input
+    # Scale input
     input_scaled = scaler.transform(input_data)
 
-    # Predict Probability
+    # Predict probability
     probability = model.predict_proba(input_scaled)[0][1]
 
     st.subheader("📈 Attrition Risk Score")
@@ -168,7 +198,8 @@ if st.button("🚀 Predict Attrition"):
         value=f"{probability:.2%}"
     )
 
-    # Risk Category
+    # Risk Level
+
     if probability < 0.30:
 
         st.success("🟢 Low Attrition Risk")
@@ -183,48 +214,48 @@ if st.button("🚀 Predict Attrition"):
 
     st.divider()
 
+    # ----------------------------
     # Recommendations
+    # ----------------------------
+
     st.subheader("💡 Recommendations")
 
     if probability > 0.60:
 
         st.write("• Reduce overtime workload")
-
         st.write("• Improve work-life balance")
-
         st.write("• Increase employee engagement")
-
         st.write("• Conduct employee satisfaction reviews")
-
-        st.write("• Review compensation and growth opportunities")
+        st.write("• Review compensation and career growth opportunities")
 
     elif probability > 0.30:
 
         st.write("• Monitor employee satisfaction")
-
         st.write("• Provide career growth opportunities")
-
         st.write("• Encourage manager feedback sessions")
-
         st.write("• Improve employee recognition programs")
 
     else:
 
         st.write("• Employee appears stable")
-
         st.write("• Continue current retention practices")
-
-        st.write("• Maintain positive work environment")
-
-        st.write("• Encourage continuous professional development")
+        st.write("• Maintain a positive work environment")
+        st.write("• Encourage professional development")
 
     st.divider()
+
+    # ----------------------------
+    # Employee Summary
+    # ----------------------------
 
     st.subheader("📋 Employee Summary")
 
     st.write(f"**Age:** {age}")
     st.write(f"**Monthly Income:** ₹{monthly_income:,}")
     st.write(f"**Distance From Home:** {distance} km")
+    st.write(f"**Job Satisfaction:** {job_satisfaction}/5")
+    st.write(f"**Work Life Balance:** {work_life}/5")
+    st.write(f"**Environment Satisfaction:** {env_sat}/5")
     st.write(f"**Years At Company:** {years_company}")
     st.write(f"**Total Working Years:** {total_years}")
     st.write(f"**OverTime:** {overtime}")
