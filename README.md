@@ -80,7 +80,7 @@ Three models were trained and compared. XGBoost was selected as the final model 
 
 SHAP (SHapley Additive exPlanations) was used to explain both global model behaviour and individual predictions.
 
-# ![SHAP Summary](assets/shap_summary.png)
+
 
 **Top 5 attrition drivers identified:**
 
